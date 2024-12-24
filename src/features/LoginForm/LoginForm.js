@@ -144,15 +144,15 @@ const LoginForm = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 textAlign: "center",
-                margin: '0 auto',
-                mb: 3
+                margin: "0 auto",
+                mb: 3,
               }}
             >
               OR
             </Divider>
 
             <p className="separator-text text-center mb-28">
-                Don’t have an account?
+              Don’t have an account?
             </p>
             <MuiButton
               name="Sign Up"
