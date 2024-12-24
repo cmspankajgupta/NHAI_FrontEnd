@@ -1,0 +1,253 @@
+/* Reset or Normalize Styles */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter';
+}
+html {
+//   font-size: 0.844vw; /* Base font size */
+font-size: 12px;
+}
+
+@import url("@fontsource/inter"); 
+@import url('@fontsource/inter/100.css');
+@import url('@fontsource/inter/200.css');
+@import url('@fontsource/inter/300.css');
+@import url('@fontsource/inter/400.css');
+@import url('@fontsource/inter/500.css');
+@import url('@fontsource/inter/600.css');
+@import url('@fontsource/inter/700.css');
+@import url('@fontsource/inter/800.css');
+@import url('@fontsource/inter/900.css');
+
+
+/* Set up custom properties (CSS variables) for consistency */
+:root {
+  --primary-color: #007bff; /* Example primary color */
+  --secondary-color: #6c757d; /* Secondary color */
+ 
+  --button-border-radius: 0.25rem;
+  --input-border-radius: 0.25rem;
+  --transition-speed: 0.3s ease-in-out;
+
+  /* Heading text font weight*/
+  --body-font-family: 'Inter';
+  --heading-font-family: 'Inter';
+  --heading-bold: 700;
+  --heading-black: 900;
+    
+  /* Body text font weight*/
+  --body-text-regular: 400;
+  --body-text-medium: 500;
+  --body-text-bold: 700; 
+
+  /* Font size for body text */
+  --font-size-lg: 1.5rem;
+  --font-size-med: 1.125rem; 
+  --font-size-sm: 1rem;
+  --font-size-xs: 0.875rem;
+  --font-szie-xxs: 0.75rem; 
+
+  
+
+/* Brand Color root css */ 
+  --brand-100:#cfdae7;
+  --brand-200:#9fb5ce; 
+  --brand-300: #7090b6;
+  --brand-400: #406b9d;
+  --brand-500: #104685;
+  --brand-600: #0d386a;
+  --brand-700: #0a2a50;
+  --brand-800: #061c35;
+  --brand-900: #030e1b;
+
+/* Blue color root css */
+  --blue-100: #d5eefc;
+  --blue-200: #acddf9; 
+  --blue-300: #82ccf7; 
+  --blue-400: #59bbf4;
+  --blue-500: #2faaf1;
+  --blue-600: #2688c1;
+  --blue-700: #1c6691;
+  --blue-800: #134460;
+  --blue-900: #092230;
+
+  /* Yellow color root css */
+  --yellow-100: #fdfcd8;
+  --yellow-200: #fbf8b1;
+  --yellow-300: #f8f58b; 
+  --yellow-400: #f6f164;
+  --yellow-500: #f4ee3d;
+  --yellow-600: #c3be31;
+  --yellow-700: #928f25; 
+  --yellow-800: #625f18; 
+  --yellow-900: #31300c; 
+
+  /* Green color root css */
+  --green-100: #d6eedd;
+  --green-200: #aedcba;
+  --green-300: #85cb98;
+  --green-400: #5db975; 
+  --green-500: #34a853; 
+  --green-600: #2a8642; 
+  --green-700: #1f6532; 
+  --green-800: #154321; 
+  --green-900: #0a2211; 
+
+  /* Orange color root css */
+  --orange-100: #ffeecc;
+  --orange-200: #ffdd99;
+  --orange-300: #ffcc67;
+  --orange-400: #ffbb34;
+  --orange-500: #ffaa01;
+  --orange-600: #cc8801;
+  --orange-700: #996601; 
+  --orange-800: #664400;
+  --orange-900: #332200;
+
+  /* Red color root css  */
+  --red-100: #f0d4d2;
+  --red-200: #e1a8a5;
+  --red-300: #d17d77;
+  --red-400: #c2514a;
+  --red-500: #b3261d;
+  --red-600: #8f1e17;
+  --red-700: #6b1711;
+  --red-800: #480f0c;
+  --red-900: #240806;
+
+  /* Gray color root css */
+  --gray--000: #ffffff;
+  --gray--100: #fafafa;
+  --gray--200: #f4f4f4;
+  --gray--300: #f0f0f0;
+  --gray--400: #e4e4e4;
+  --gray--500: #e0e0e0;
+  --gray--600: #9e9e9e;
+  --gray--700: #757575;
+  --gray--800: #212121;
+  --gray--900: #000000; 
+}
+
+/* Utility Classes */
+.text-center {  text-align: center;}
+.text-right {  text-align: right;}
+.mb-28 {  margin-bottom: 1.75rem;}
+.mt-28 {  margin-top: 1.75rem;}
+.mt-32 {  margin-top: 2rem;}
+.mb-32 {  margin-bottom: 2rem;}
+.pt-32 {  padding-top: 2rem;}
+.pb-32 {  padding-bottom: 2rem;}
+.head-black{ font-weight: var(--heading-black);}
+.head-bold{ font-weight: var( --heading-bold);}
+.text-400{ font-weight: var(--body-text-regular);}
+.text-500{ font-weight: var(--body-text-medium);} 
+.text-700{ font-weight: var(--body-text-bold);}
+.block{display: block;}
+.error{color: var(--red-500)}
+
+/* Typography */
+.head-xl{
+  font-size: 5.5rem;
+  font-style: normal;
+  line-height: 5.75rem;
+  letter-spacing: -0.055rem;
+}
+.head-l{
+  font-size: 4rem;
+  font-style: normal;
+  line-height: 4.25rem;
+  letter-spacing: -0.04rem;
+}
+.head-m{
+  font-size: 2.5rem;
+  font-style: normal;
+  line-height: 2.75rem;
+  letter-spacing: -0.025rem;
+}
+.head-s{
+  font-size: 2rem;
+  font-style: normal;
+  line-height: 2.25rem; 
+  letter-spacing: -0.02rem;
+}
+
+.head-xs{
+  font-size: 1.5rem;
+  font-style: normal;
+  line-height: 2.25rem;
+  letter-spacing: -0.015rem;
+}
+.head-xxs{
+  font-size: 1rem;
+  font-style: normal;
+  line-height: 1.5rem; 
+  letter-spacing: -0.01rem;
+}
+
+
+/* Regular text */
+.text-regular-l{
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2rem;
+  letter-spacing: -0.008rem;
+}
+.text-regular-m{
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2.25rem;
+  letter-spacing: -0.008rem;
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font-family);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+  font-size: var(--font-size-base);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition-speed);
+}
+
+a:hover {  color: var(--secondary-color);}
+
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.col {
+  flex: 1;
+  min-width: 12.5rem;
+}
+
+
+
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 2rem;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+}
