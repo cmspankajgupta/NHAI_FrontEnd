@@ -24,7 +24,7 @@ const AppRoutes = () => {
       <Route path="/" element={<PublicRoute> <PublicLayout><HomePage /></PublicLayout></PublicRoute>} />
       <Route path="/service" element={<PublicRoute> <PublicLayout><ServicePageWithErrorBoundary /></PublicLayout></PublicRoute>} />
       <Route path="/login" element={<PublicRoute><AuthLayout><LoginPage /></AuthLayout></PublicRoute>} />
-      {/* <Route path="/signup" element={<PublicRoute><AuthLayout><SignUpPage /></AuthLayout></PublicRoute>} /> */}
+      <Route path="/signup" element={<PublicRoute><AuthLayout><SignUpPage /></AuthLayout></PublicRoute>} />
       <Route path="/profile/:id" element={<PrivateRoute><PrivateLayout><ProfilePage /></PrivateLayout></PrivateRoute>} />
       <Route path="/dashboard" element={<ProtectedRoute><SomeProtectedPage /></ProtectedRoute>} />
      

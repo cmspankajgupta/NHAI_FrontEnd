@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import MuiInput from "../../components/Input/MuiInput";
 import MuiButton from "../../components/Button/MuiButton";
-import DigitalIndia from "../../assets/images/logo/DigitalIndia.svg";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -25,15 +24,10 @@ import { LoginSchema } from "./LoginSchema";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import OtpForm from "../OtpForm/OtpForm";
 import { useNavigate } from 'react-router-dom';
-
-// const navigate = useNavigate();
-
-// const handleSignUpClick = () => {
-//   navigate('/SignUpPage'); // Navigates to the signup page
-// };
-
+import FormFooter from "../../components/FormFooter/FormFooter";
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { Mobile, isPhone, loading, error } = useSelector(
     (state) => state.login
   );
@@ -51,13 +45,13 @@ const LoginForm = () => {
     setSubmitting(false);
   };
 
-  const handleBackClick = () => {
-    dispatch(resetMobile(Mobile));
-  };
+  // const handleBackClick = () => {
+  //   dispatch(resetMobile(Mobile));
+  // };
 
-  const handleEditClick = () => {
-    dispatch(editMobile(Mobile));
-  };
+  // const handleEditClick = () => {
+  //   dispatch(editMobile(Mobile));
+  // };
 
   return (
     <>
@@ -152,6 +146,7 @@ const LoginForm = () => {
                 alignItems: "center",
                 textAlign: "center",
                 margin: "0 auto",
+                color: `var(--gray-700)`,
                 mb: 3,
               }}
             >
@@ -161,17 +156,17 @@ const LoginForm = () => {
             <p className="separator-text text-center mb-28">
               Don’t have an account?
             </p>
-            <MuiButton
-              // onClick={handleSignUpClick}
-              name="Sign Up"
-              variant="outlined"
-              sx={{
-                marginBottom: "32px",
-                borderRadius: "100px",
-                color: "brand-500",
-                borderColor: "brand-200",
-              }}
-            />
+              <MuiButton 
+                onClick={()=> navigate('/signup')}
+                name="Sign Up"
+                variant="outlined"
+                sx={{
+                  marginBottom: "32px",
+                  borderRadius: "100px",
+                  color: "brand-500",
+                  borderColor: "brand-200",
+                }}
+              />          
             <p className="text-center getHelpContainer mb-28">
               <span>Having trouble logging in? </span>
               <a href="#" className="getHelp">
@@ -182,10 +177,7 @@ const LoginForm = () => {
         ) : (
           <OtpForm />
         )}
-        <div className="login-footer">
-          <span>powered by </span>
-          <img src={DigitalIndia} alt="DigitalIndia" />
-        </div>
+       <FormFooter/>
       </div>
     </>
   );
