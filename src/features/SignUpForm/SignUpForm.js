@@ -1,12 +1,15 @@
 import "./SignUpForm.scss";
 import { Box } from "@mui/material";
-import MuiInput from "../../componetns/Input/MuiInput";
-import MuiButton from "../../componetns/Button/MuiButton";
-import DigitalIndia from "../../assests/DigitalIndia.svg";
-import ArrowBack from '../../assests/arrow_back.svg';
-const Signup = () => {
+import MuiInput from "../../components/Input/MuiInput";
+import MuiButton from "../../components/Button/MuiButton";
+import ArrowBack from '../../assets/images/logo/arrow_back.svg';
+import FormFooter from "../../components/FormFooter/FormFooter";
+import { useNavigate } from "react-router-dom";
+
+const SignupForm = () => {
+  const navigate = useNavigate();
   return (
-    <div className="LoginContainer">
+    <div className="signUpContainer">
       <Box
         sx={{
           display: "flex",
@@ -15,7 +18,7 @@ const Signup = () => {
           paddingBottom: 0,
         }}
       >
-        <img src={ArrowBack} alt="Arrow Back" style={{width: '2rem', marginBottom: '0.875rem'}}/>
+        <img src={ArrowBack} alt="Arrow Back" style={{width: '2rem', marginBottom: '0.875rem'}} onClick={()=> navigate("/login")}/>
         <p className="head-xs head-black mb-32">Sign Up</p>
         <form
           style={{ width: "100%", display: "flex", flexDirection: "column" }}
@@ -48,12 +51,10 @@ const Signup = () => {
           />
         </form>     
       </Box>
-      <div className="login-footer">
-            <span>powered by </span>
-            <img src={DigitalIndia} alt="DigitalIndia" />
-        </div>
+      
+      <FormFooter/>
     </div>
   );
 };
 
-export default Signup;
+export default SignupForm;

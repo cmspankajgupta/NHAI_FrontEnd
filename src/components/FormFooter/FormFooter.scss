@@ -1,0 +1,16 @@
+.form-footer{
+    color: var(--grey-700);   
+    font-size: 0.625rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.125rem;
+    letter-spacing: -0.05px;
+    border-radius: 0px 0px 1.5rem 1.5rem;
+    background: var(--Grey-100, #FAFAFA);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form-footer img{
+    height: 2.5rem;
+}

@@ -3,6 +3,7 @@ import axiosInstance from '../../config/axiosConfig';
 import DOMPurify from 'dompurify';
 import { validatePhoneNumber } from '../../utils/inputUtils';
 import envConfig from "../../config/envConfig"
+import { Login } from '../../config/apiEndPoints';
 
 
 const sanitizeInput = (input) => {
@@ -21,7 +22,7 @@ const initialState = {
   isResend: false
 };
 
-export const sendOtp = createAsyncThunk(
+export const sendOtp = createAsyncThunk( 
   'login/sendOtp',
   async (Mobile, { rejectWithValue }) => {
     try {
@@ -29,11 +30,7 @@ export const sendOtp = createAsyncThunk(
       if (!validatePhoneNumber(sanitizedPhoneNumber)) {
         throw new Error('Invalid phone number');
       }
-      const response = await axiosInstance.post(
-        'v3/24367bc1-d423-46f6-8159-d678c33c706e', //success
-        // 'v3/d2d663f3-924b-4c66-ae8c-4fb3e96b75e', //error
-        { mobile_number: sanitizedPhoneNumber,device_id:'device-' + Math.random().toString(36).substr(2, 9),client_id:envConfig.CLIENT_ID }
-      );
+      const response = Login({ mobile_number: sanitizedPhoneNumber,device_id:'device-' + Math.random().toString(36).substr(2, 9),client_id:envConfig.CLIENT_ID })
       return response.data; 
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message || 'Failed to send OTP');

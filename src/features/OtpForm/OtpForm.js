@@ -4,7 +4,7 @@ import MuiButton from "../../components/Button/MuiButton";
 import MuiInput from "../../components/Input/MuiInput";
 import { useEffect, useRef } from "react";
 import { useFormik } from "formik";
-import { OtpSchema } from "../OtpBox/OtpSchema";
+import { OtpSchema } from "./OtpSchema";
 import { useDispatch, useSelector } from "react-redux";
 import { setMobile, sendOtp, resetMobile, editMobile, setOtp, verifyOtp, resetError, resetOtp } from "../../store/slices/loginSlice";
 import { useNavigate } from "react-router-dom";
@@ -117,7 +117,7 @@ const OtpForm = () => {
             </p>
 
             <form onSubmit={formik.handleSubmit} style={{ display: "flex", flexDirection: "column" }}>
-                <div style={{ display: "flex", gap: 16 }}>
+                <div style={{ display: "inline-flex", gap: '2rem' }}>
                     {otp.map((item, index) => (
                         <div key={index} style={{ width: "fit-content" }}>
                             <MuiInput
