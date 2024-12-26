@@ -31,6 +31,7 @@ export const sendOtp = createAsyncThunk(
       }
       const response = await axiosInstance.post(
         'v3/24367bc1-d423-46f6-8159-d678c33c706e', //success
+        //`envConfig.API_BASE_URL`
         // 'v3/d2d663f3-924b-4c66-ae8c-4fb3e96b75e', //error
         { mobile_number: sanitizedPhoneNumber,device_id:'device-' + Math.random().toString(36).substr(2, 9),client_id:envConfig.CLIENT_ID }
       );
