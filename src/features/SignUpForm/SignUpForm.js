@@ -1,12 +1,12 @@
 import "./SignUpForm.scss";
 import { Box } from "@mui/material";
-import MuiInput from "../../componetns/Input/MuiInput";
-import MuiButton from "../../componetns/Button/MuiButton";
-import DigitalIndia from "../../assests/DigitalIndia.svg";
-import ArrowBack from '../../assests/arrow_back.svg';
-const Signup = () => {
+import MuiInput from "../../components/Input/MuiInput";
+import MuiButton from "../../components/Button/MuiButton";
+import DigitalIndia from "../../assets/images/logo/DigitalIndia.svg";
+import ArrowBack from '../../assets/images/logo/arrow_back.svg';
+const SignupForm = () => {
   return (
-    <div className="LoginContainer">
+    <div className="signUpContainer">
       <Box
         sx={{
           display: "flex",
@@ -48,7 +48,7 @@ const Signup = () => {
           />
         </form>     
       </Box>
-      <div className="login-footer">
+      <div className="signUp-footer">
             <span>powered by </span>
             <img src={DigitalIndia} alt="DigitalIndia" />
         </div>
@@ -56,4 +56,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignupForm;

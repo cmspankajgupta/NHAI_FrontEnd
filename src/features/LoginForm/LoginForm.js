@@ -24,6 +24,13 @@ import {
 import { LoginSchema } from "./LoginSchema";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import OtpForm from "../OtpForm/OtpForm";
+import { useNavigate } from 'react-router-dom';
+
+// const navigate = useNavigate();
+
+// const handleSignUpClick = () => {
+//   navigate('/SignUpPage'); // Navigates to the signup page
+// };
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -155,6 +162,7 @@ const LoginForm = () => {
               Don’t have an account?
             </p>
             <MuiButton
+              // onClick={handleSignUpClick}
               name="Sign Up"
               variant="outlined"
               sx={{
