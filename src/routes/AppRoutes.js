@@ -27,7 +27,6 @@ const AppRoutes = () => {
       <Route path="/signup" element={<PublicRoute><AuthLayout><SignUpPage /></AuthLayout></PublicRoute>} />
       <Route path="/profile/:id" element={<PrivateRoute><PrivateLayout><ProfilePage /></PrivateLayout></PrivateRoute>} />
       <Route path="/dashboard" element={<ProtectedRoute><SomeProtectedPage /></ProtectedRoute>} />
-     
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
