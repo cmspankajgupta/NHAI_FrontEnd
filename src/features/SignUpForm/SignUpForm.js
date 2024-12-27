@@ -87,7 +87,7 @@ const SignupForm = () => {
               marginBottom: "1.75rem",
               background: `var(--brand-500)`,
               borderRadius: "6.25rem",
-              fontWeight: `var(--body-text-medium)`
+              fontWeight: `var(--font-medium)`
             }}
           />
         </form>     
