@@ -18,7 +18,7 @@ const SignupForm = () => {
           paddingBottom: 0,
         }}
       >
-        <img src={ArrowBack} alt="Arrow Back" style={{width: '2rem', marginBottom: '0.875rem'}} onClick={()=> navigate("/login")}/>
+        <img className="cursor-pointer" src={ArrowBack} alt="Arrow Back" style={{width: '2rem', marginBottom: '0.875rem'}} onClick={()=> navigate("/login")}/>
         <p className="head-xs head-black mb-32">Sign Up</p>
         <form
           style={{ width: "100%", display: "flex", flexDirection: "column" }}
