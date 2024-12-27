@@ -177,7 +177,7 @@ const OtpForm = () => {
                         marginBottom: "28px",
                         background: `var(--brand-500)`,
                         borderRadius: "100px",
-                        fontWeight: `var(--body-text-medium)`,
+                        fontWeight: `var(--font-medium)`,
                     }}
                 />
             </form>
