@@ -117,7 +117,7 @@ const OtpForm = () => {
             </p>
 
             <form onSubmit={formik.handleSubmit} style={{ display: "flex", flexDirection: "column" }}>
-                <div style={{ display: "flex", gap: 16 }}>
+                <div style={{ display: "inline-flex", gap: '2rem' }}>
                     {otp.map((item, index) => (
                         <div key={index} style={{ width: "fit-content" }}>
                             <MuiInput
@@ -177,7 +177,7 @@ const OtpForm = () => {
                         marginBottom: "28px",
                         background: `var(--brand-500)`,
                         borderRadius: "100px",
-                        fontWeight: `var(--body-text-medium)`,
+                        fontWeight: `var(--font-medium)`,
                     }}
                 />
             </form>
