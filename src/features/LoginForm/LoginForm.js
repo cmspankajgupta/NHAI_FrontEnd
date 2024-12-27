@@ -61,11 +61,11 @@ const LoginForm = () => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              padding: 6,
+              padding: 4,
               paddingBottom: 0,
             }}
           >
-            <p className="head-xs head-black mb-32">Login</p>
+            <p className="head-xs head-black mb-28">Login</p>
 
             <Formik
               initialValues={{ Mobile: Mobile || "" }}

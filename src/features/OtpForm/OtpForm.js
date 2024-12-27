@@ -98,7 +98,7 @@ const OtpForm = () => {
     };
 
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", padding: 6, paddingBottom: 0 }}>
+        <Box sx={{ display: "flex", flexDirection: "column", padding: 4, paddingBottom: 0 }}>
             <div style={{ marginBottom: "14px", cursor: 'pointer' }} onClick={handleEdit}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <mask id="mask0_179_2821" style={{ maskType: "alpha" }} maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
@@ -117,7 +117,7 @@ const OtpForm = () => {
             </p>
 
             <form onSubmit={formik.handleSubmit} style={{ display: "flex", flexDirection: "column" }}>
-                <div style={{ display: "inline-flex", gap: '2rem' }}>
+                <div style={{ display: "inline-flex", gap: '1rem' }}>
                     {otp.map((item, index) => (
                         <div key={index} style={{ width: "fit-content" }}>
                             <MuiInput
