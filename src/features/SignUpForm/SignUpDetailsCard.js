@@ -1,4 +1,4 @@
-import { Box, Typography, Divider, Avatar } from "@mui/material";
+import { Box, Divider, Avatar } from "@mui/material";
 import React from "react";
 import FormFooter from "../../components/FormFooter/FormFooter";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ export default function SignUpDetailsCard() {
         }}
       >
          <Box sx={{ padding: 4, pb: 2 }}>
-            <img
+            <img className="cursor-pointer"
               src={ArrowBack}
               alt="Arrow Back"
               style={{ width: "2rem", marginBottom: "0.875rem" }}
