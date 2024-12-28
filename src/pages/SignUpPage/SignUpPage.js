@@ -31,7 +31,6 @@ function SignUpPage() {
     onSubmit: async (values) => {
       try {
         const res = await dispatch(verifyOtp(values.otp));
-        alert('hii')
         if (res.payload?.success) {
           localStorage.setItem('token', res?.payload?.data?.token);
           await dispatch(setAuthenticated(true))
