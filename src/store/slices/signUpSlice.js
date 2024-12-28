@@ -1,50 +1,135 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  sendOtp as sendOtpAPI,
+  verifyOtp as verifyOtpAPI,
+  verifySapId as verifySapIdAPI,
+} from "../../config/apiEndPoints";
+import envConfig from "../../config/envConfig";
 
-// Async thunk for fetching API data
-export const fetchData = createAsyncThunk(
-  'https://run.mocky.io/v3/fa1f3cb1-214d-48a7-98b9-491d92a445d4',
-  async (endpoint, { rejectWithValue }) => {
+const initialState = {
+  sapId: "",
+  data: null,
+  loading: false,
+  error: null,
+  mobile: "",
+  otp: "",
+  isSapVerified: false,
+  otpSent: false,
+};
+
+export const verifySapId = createAsyncThunk(
+  "signup/verifySapId",
+  async (sapId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(endpoint);
-      return response.data; // Return the data as payload
+      const response = await verifySapIdAPI({ sapId: sapId });
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error.response ? error.response.data : error.message);
+      return rejectWithValue(
+        error.response?.data || error.message || "Failed to verify"
+      );
+    }
+  }
+);
+
+export const sendOtp = createAsyncThunk(
+  "signUp/sendOtp",
+  async (mobile, { rejectWithValue }) => {
+    try {
+      const response = await sendOtpAPI({
+        mobile_number: mobile,
+        device_id: "device-" + Math.random().toString(36).substr(2, 9),
+        client_id: envConfig.CLIENT_ID,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data || error.message || "Failed to send OTP"
+      );
+    }
+  }
+);
+
+export const verifyOtp = createAsyncThunk(
+  "signUp/verifyOtp",
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const { mobile, otp } = getState().signUp;
+
+      const response = await verifyOtpAPI({
+        mobile_number: mobile,
+        otp: otp,
+        device_id: "device-" + Math.random().toString(36).substr(2, 9),
+        client_id: envConfig.CLIENT_ID,
+      });
+      return response.data; // Response from the server (e.g., user details or a token)
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data || error.message || "Failed to verify OTP"
+      );
     }
   }
 );
 
 // Create slice
 const signUpSlice = createSlice({
-  name: 'signUpApi',
-  initialState: {
-    sapId: "",
-    data: [],          // To store API data
-    loading: false,      // To handle loading state
-    error: null,         // To handle error state
-  },
+  name: "signUp",
+  initialState,
   reducers: {
-    clearData: (state) => {
-        state.data = null;
-        state.error = null;
-        state.loading = false;
-      },
+    setSapId(state, action) {
+      state.sapId = action.payload;
+    },
+    setIsSapVerified(state, action) {
+      state.isSapVerified = action.payload;
+      state.error = "";
+    },
+    setOtpSent(state, action) {
+      state.otpSent = action.payload;
+      state.error = "";
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchData.pending, (state) => {
+      .addCase(verifySapId.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchData.fulfilled, (state, action) => {
+      .addCase(verifySapId.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.data = action.payload?.data;
       })
-      .addCase(fetchData.rejected, (state, action) => {
+      .addCase(verifySapId.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+    builder
+      .addCase(sendOtp.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(sendOtp.fulfilled, (state, action) => {
+        state.loading = false;
+        state.otp = "";
+      })
+      .addCase(sendOtp.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+    builder
+      .addCase(verifyOtp.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(verifyOtp.fulfilled, (state, action) => {
+        state.loading = false;
+        state.otp = "";
+      })
+      .addCase(verifyOtp.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
   },
 });
+
+export const { setIsSapVerified, setSapId, setOtpSent } = signUpSlice.actions;
 
 export default signUpSlice.reducer;

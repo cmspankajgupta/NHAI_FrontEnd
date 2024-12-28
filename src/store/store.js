@@ -10,7 +10,7 @@ const store = configureStore({
     login: loginReducer,
     fetch: fetchReducer,
     auth: authReducer,
-    signUpApi: signUpReducer,
+    signUp: signUpReducer,
   },
 });
 

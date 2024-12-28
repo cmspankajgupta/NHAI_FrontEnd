@@ -1,163 +1,171 @@
 import "./LoginForm.scss";
-// import { Box } from "@mui/material";
-import {
-  Box,
-  Card,
-  CardContent,
-  Typography,
-  TextField,
-  Button,
-  Grid,
-  Divider,
-} from "@mui/material";
+import { Box, Divider, CircularProgress } from "@mui/material";
 import MuiInput from "../../components/Input/MuiInput";
 import MuiButton from "../../components/Button/MuiButton";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setMobile,
   sendOtp,
-  resetMobile,
   editMobile,
+  verifyOtp,
+  resetError,
+  resetOtp,
 } from "../../store/slices/loginSlice";
 import { LoginSchema } from "./LoginSchema";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import OtpForm from "../OtpForm/OtpForm";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import FormFooter from "../../components/FormFooter/FormFooter";
+import { OtpSchema } from "../OtpForm/OtpSchema";
+import useCountdown from "../../hooks/useCountdown";
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { Mobile, isPhone, loading, error } = useSelector(
-    (state) => state.login
-  );
+  const { Mobile, isPhone, error } = useSelector((state) => state.login);
+  const { formattedTime, timeLeft, reset, restart } = useCountdown(30);
 
-  const handleMobileChange = (e, setFieldValue) => {
-    const input = e.target.value.replace(/[^\d]/g, ""); // Remove non-numeric characters
-    if (input.length <= 10) {
-      dispatch(setMobile(input)); // Update Redux state
-      setFieldValue("Mobile", input); // Update Formik state
+  const handleBack = () => {
+    dispatch(editMobile(Mobile));
+    dispatch(resetError());
+  };
+
+  const formikOTP = useFormik({
+    initialValues: {
+      otp: "",
+    },
+    validationSchema: OtpSchema,
+    onSubmit: async (values) => {
+      try {
+        const response = await dispatch(verifyOtp(values.otp));
+        if (response.payload?.success) {
+          await dispatch(setMobile(""));
+          navigate("/dashboard");
+        } else {
+          console.log("OTP verification failed");
+        }
+      } catch (error) {
+        console.error("OTP verification error:", error);
+      }
+    },
+  });
+
+  const handleResendOTP = async () => {
+    dispatch(resetOtp());
+    dispatch(resetError());
+    try {
+      const response = await dispatch(sendOtp(Mobile));
+      if (response.payload?.success) {
+        reset();
+        restart();
+      } else {
+        console.log("OTP resend failed");
+      }
+    } catch (error) {
+      console.error("Error during OTP resend:", error);
     }
   };
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    dispatch(sendOtp(values.Mobile));
-    setSubmitting(false);
-  };
-
-  // const handleBackClick = () => {
-  //   dispatch(resetMobile(Mobile));
-  // };
-
-  // const handleEditClick = () => {
-  //   dispatch(editMobile(Mobile));
-  // };
+  const formik = useFormik({
+    initialValues: { mobile: Mobile || "" },
+    validationSchema: LoginSchema,
+    onSubmit: async (values) => {
+      formik.setSubmitting(true);
+      try {
+        await dispatch(setMobile(values.mobile));
+        const res = await dispatch(sendOtp(values.mobile));
+        if (res?.payload.success) {
+        } else {
+          console.log("OTP resend failed");
+        }
+      } catch (error) {
+        console.error("Error during OTP resend:", error);
+      } finally {
+        formik.setSubmitting(false);
+      }
+    },
+  });
 
   return (
     <>
       <div className="LoginContainer">
-        {isPhone ? (
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              padding: 4,
-              paddingBottom: 0,
-            }}
-          >
-            <p className="head-xs head-black mb-28">Login</p>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            padding: 4,
+            paddingBottom: 0,
+          }}
+        >
+          {isPhone ? (
+            <>
+              <p className="head-xs head-black mb-28">Login</p>
 
-            <Formik
-              initialValues={{ Mobile: Mobile || "" }}
-              validationSchema={LoginSchema}
-              onSubmit={handleSubmit}
-              enableReinitialize
-            >
-              {({ errors, touched, isSubmitting, setFieldValue }) => (
-                <Form
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    flexDirection: "column",
+              <form
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+                onSubmit={formik.handleSubmit}
+              >
+                <MuiInput
+                  variant="outlined"
+                  name="mobile"
+                  label="Registered Mobile Number"
+                  className="mb-2"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.mobile}
+                  type="text"
+                  error={
+                    formik.touched?.mobile && Boolean(formik.errors?.mobile)
+                  }
+                  errorText={formik.errors.mobile}
+                  // required
+                  sx={{
+                    marginBottom: "0.4rem",
                   }}
-                >
-                  <Field
-                    as={TextField}
-                    name="Mobile"
-                    label="Registered Mobile Number"
-                    variant="outlined"
-                    fullWidth
-                    className="mb-2"
-                    margin="normal"
-                    value={Mobile}
-                    onChange={(e) => handleMobileChange(e, setFieldValue)}
-                    error={(touched.Mobile && Boolean(errors.Mobile)) || error}
-                    helperText={<ErrorMessage name="Mobile" />}
-                  />
+                />
+                <MuiButton
+                  type="submit"
+                  name="Login using OTP"
+                  variant="contained"
+                  fullWidth
+                  endIcon={
+                    formik.isSubmitting ? (
+                      <CircularProgress size={13} color="white" />
+                    ) : null
+                  }
+                  disabled={formik.isSubmitting}
+                  sx={{
+                    mt: 2,
+                    mb: 2,
+                    background: `var(--brand-500)`,
+                    borderRadius: "6.25rem",
+                    fontWeight: `var(--font-medium)`,
+                  }}
+                />
+              </form>
+              <Divider
+                sx={{
+                  width: "100px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  textAlign: "center",
+                  margin: "0 auto",
+                  color: `var(--gray-700)`,
+                  mb: 3,
+                }}
+              >
+                OR
+              </Divider>
 
-                  {error && (
-                    <Typography
-                      color="error"
-                      sx={{
-                        color: "#d32f2f", // Error color
-                        fontWeight: 400,
-                        fontSize: "0.75rem",
-                        lineHeight: 1.66,
-                        letterSpacing: "0.03333em",
-                        textAlign: "left",
-                        marginTop: "0.75rem",
-                        marginRight: "14px",
-                        marginBottom: "0",
-                        marginLeft: "1px",
-                      }}
-                    >
-                      {error}
-                    </Typography>
-                  )}
-                  <Button
-                    variant="contained"
-                    fullWidth
-                    disabled={isSubmitting || loading}
-                    sx={{
-                      mt: 2,
-                      mb: 2,
-                      backgroundColor: "#104685",
-                      color: "white",
-                      borderRadius: "25px",
-                      paddingY: "12px",
-                      textTransform: "none",
-                      "&:hover": {
-                        backgroundColor: "#083962",
-                      },
-                    }}
-                    type="submit"
-                  >
-                    Login using OTP
-                  </Button>
-                </Form>
-              )}
-            </Formik>
-            {/* <div className="separator-text text-center mb-28">- OR -</div> */}
-            <Divider
-              sx={{
-                width: "100px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                textAlign: "center",
-                margin: "0 auto",
-                color: `var(--gray-700)`,
-                mb: 3,
-              }}
-            >
-              OR
-            </Divider>
-
-            <p className="separator-text text-center mb-28">
-              Don’t have an account?
-            </p>
-              <MuiButton 
-                onClick={()=> navigate('/signup')}
+              <p className="separator-text text-center mb-28">
+                Don’t have an account?
+              </p>
+              <MuiButton
+                onClick={() => navigate("/signup")}
                 name="Sign Up"
                 variant="outlined"
                 sx={{
@@ -166,18 +174,28 @@ const LoginForm = () => {
                   color: "brand-500",
                   borderColor: "brand-200",
                 }}
-              />          
-            <p className="text-center getHelpContainer mb-28">
-              <span>Having trouble logging in? </span>
-              <a href="#" className="getHelp">
-                Get Help
-              </a>
-            </p>
-          </Box>
-        ) : (
-          <OtpForm />
-        )}
-       <FormFooter/>
+              />
+              <p className="text-center getHelpContainer mb-28">
+                <span>Having trouble logging in? </span>
+                <Link to="#" className="getHelp">
+                  Get Help
+                </Link>
+              </p>
+            </>
+          ) : (
+            <OtpForm
+              formik={formikOTP}
+              editable={true}
+              handleBack={handleBack}
+              handleResend={handleResendOTP}
+              formattedTime={formattedTime}
+              timeLeft={timeLeft}
+              mobile={Mobile}
+              error={error}
+            />
+          )}
+        </Box>
+        <FormFooter />
       </div>
     </>
   );
