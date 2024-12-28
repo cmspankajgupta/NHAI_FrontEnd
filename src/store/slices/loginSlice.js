@@ -3,7 +3,7 @@ import axiosInstance from '../../config/axiosConfig';
 import DOMPurify from 'dompurify';
 import { validatePhoneNumber } from '../../utils/inputUtils';
 import envConfig from "../../config/envConfig"
-import { Login } from '../../config/apiEndPoints';
+import { Login, verifyOtpPerLogin } from '../../config/apiEndPoints';
 
 
 const sanitizeInput = (input) => {
@@ -12,7 +12,7 @@ const sanitizeInput = (input) => {
 
 const initialState = {
   Mobile: '',
-  otp: new Array(5).fill(""), // Initialize otp as an array
+  otp: "", // Initialize otp as an array
   isPhone: true,
   loading: false,
   loadingVerify: false,
@@ -30,7 +30,7 @@ export const sendOtp = createAsyncThunk(
       if (!validatePhoneNumber(sanitizedPhoneNumber)) {
         throw new Error('Invalid phone number');
       }
-      const response = Login({ mobile_number: sanitizedPhoneNumber,device_id:'device-' + Math.random().toString(36).substr(2, 9),client_id:envConfig.CLIENT_ID })
+      const response = await Login({ mobile_number: sanitizedPhoneNumber,device_id:'device-' + Math.random().toString(36).substr(2, 9),client_id:envConfig.CLIENT_ID })
       return response.data; 
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message || 'Failed to send OTP');
@@ -44,9 +44,9 @@ export const verifyOtp = createAsyncThunk(
     try {
       const { Mobile, otp } = getState().login;
       const sanitizedPhoneNumber = sanitizeInput(Mobile);
-      const sanitizedOtp = otp.join(''); // Join the OTP array into a string
+      const sanitizedOtp = otp; // Join the OTP array into a string
 
-      const response = await axiosInstance.post('v3/3a143800-767b-413b-a4aa-05f7b69b92d2', {
+      const response = await verifyOtpPerLogin({
         // const response = await axiosInstance.post('v3/3a143800-767b-413b-a4aa-05f7b69b92d', {
         mobile_number: sanitizedPhoneNumber,
         otp: sanitizedOtp
@@ -89,7 +89,10 @@ const loginSlice = createSlice({
     },
     resetOtp:(state,action)=>{
       state.otp= new Array(5).fill("");
-    } 
+    },
+    setAuthenticated(state, action) {
+      state.isAuthenticated = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -100,7 +103,7 @@ const loginSlice = createSlice({
       .addCase(sendOtp.fulfilled, (state, action) => {
         state.loading = false;
         state.isPhone = false;
-        state.otp= Array(5).fill('') ;
+        state.otp= "" ;
         state.isResend = true;
       })
       .addCase(sendOtp.rejected, (state, action) => {
@@ -127,6 +130,6 @@ const loginSlice = createSlice({
   },
 });
 
-export const { setMobile, resetMobile, editMobile, setOtp, resetError,resendOtp, resetOtp } = loginSlice.actions;
+export const { setMobile, resetMobile, editMobile, setOtp, resetError,resendOtp, resetOtp,setAuthenticated } = loginSlice.actions;
 
 export default loginSlice.reducer;

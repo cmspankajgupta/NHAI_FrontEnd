@@ -1,9 +1,33 @@
 import axiosInstance from "./axiosConfig";
 
-export const Login = async(payload)=>{ 
-    return await axiosInstance.post(
-    'v3/24367bc1-d423-46f6-8159-d678c33c706e', //success
-    //`envConfig.API_BASE_URL`
-    // 'v3/d2d663f3-924b-4c66-ae8c-4fb3e96b75e', //error
+export const Login = async (payload) => {
+  return await axiosInstance.post(
+    "v3/af89ce6c-2259-437e-8580-b28a2ef2d81e",
     payload
-  );}
+  );
+};
+export const verifyOtpPerLogin = async (payload) => {
+  return await axiosInstance.post(
+    "v3/be5b7226-3854-4fe0-ab22-8032bf7bfd44",
+    payload
+  );
+};
+export const verifySapId = async (payload) => {
+  return await axiosInstance.post(
+    "v3/c53b07ef-2bf9-4fa5-9a3b-453de64b738d",
+    payload
+  );
+};
+
+export const sendOtp = async (payload) => {
+  return await axiosInstance.post(
+    "v3/ccb5c639-b75d-4df9-a190-f49d78a5cfdc",
+    payload
+  );
+};
+export const verifyOtp = async (payload) => {
+  return await axiosInstance.post(
+    "v3/be5b7226-3854-4fe0-ab22-8032bf7bfd44",
+    payload
+  );
+};
