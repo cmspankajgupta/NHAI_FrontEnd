@@ -37,7 +37,6 @@ const LoginForm = () => {
     validationSchema: OtpSchema,
     onSubmit: async (values) => {
       try {
-        alert(values.otp);
         const res = await dispatch(verifyOtp(values.otp));
         if (res.payload?.success) {
           await dispatch(setMobile(""));
