@@ -40,10 +40,9 @@ const Header = () => {
           sx={{
             justifyContent: "space-between",
             padding: isMobile ? "0 8px" : "0",
-            maxWidth: "90%",
-            marginLeft: "5%",
-            marginRight: "5%",
-            // margin: '0 auto'
+            width: "96rem",
+            maxWidth: "100%",
+            margin: '0 auto'
           }}
         >
           <Box display="flex" alignItems="center">

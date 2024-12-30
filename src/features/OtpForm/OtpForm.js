@@ -1,4 +1,3 @@
-import "./OtpForm.scss";
 import { Link, CircularProgress } from "@mui/material";
 import MuiButton from "../../components/Button/MuiButton";
 import MuiInput from "../../components/Input/MuiInput";

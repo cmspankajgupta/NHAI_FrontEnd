@@ -1,9 +1,8 @@
 import { Box } from "@mui/material";
 import OtpForm from "../../features/OtpForm/OtpForm";
-import SignUpDetailsCard from "../../features/SignUpForm/SignUpDetailsCard";
-import SignupForm from "../../features/SignUpForm/SignUpForm";
+import SignUpDetailsCard from "../../features/SignUp/Internal/SignUpDetailsCard";
+import SignupForm from "../../features/SignUp/Internal/SignUpForm";
 import FormFooter from "../../components/FormFooter/FormFooter";
-import "./SignUpPage.scss";
 import { OtpSchema } from "../../features/OtpForm/OtpSchema";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +16,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import useCountdown from "../../hooks/useCountdown";
 import { setAuthenticated } from "../../store/slices/loginSlice";
+import SignUpContratual from "../../features/SignUp/Internal/SignUpContratual/SignUpContratual";
+import SignUpInvite from "../../features/SignUp/Internal/SignUpContratual/SignUpInviteAccept";
 
 function SignUpPage() {
   const { isSapVerified, otpSent, data } = useSelector((state) => state.signUp);
@@ -69,15 +70,15 @@ function SignUpPage() {
   };
 
   return (
-    <div className="Form-container">
-      <div className="signUp-page">
+    <div className="form-page-container">
+      <div className="form-page">
         <div className="left-section ">
-          <p className="signUpTitle">
+          <p className="formTitle">
             Welcome to<span className="head-black block">DataLake 3.0</span>
           </p>
         </div>
         <div className="right-section  mt-32">
-          <div className="signUpContainer">
+          <div className="form-container">
             <Box
               sx={{
                 display: "flex",
@@ -86,9 +87,11 @@ function SignUpPage() {
                 paddingBottom: 0,
               }}
             >
-              {!isSapVerified && <SignupForm />}
+              {/* {!isSapVerified && <SignupForm />}
               {isSapVerified && !otpSent && <SignUpDetailsCard />}
-              {isSapVerified && otpSent && <OtpForm formik={formikOTP} handleBack={handleBack} handleResend={handleResendOTP} formattedTime={formattedTime} timeLeft={timeLeft} mobile={data?.mobile}/>}
+              {isSapVerified && otpSent && <OtpForm formik={formikOTP} handleBack={handleBack} handleResend={handleResendOTP} formattedTime={formattedTime} timeLeft={timeLeft} mobile={data?.mobile}/>} */}
+              {/* <SignUpContratual/> */}
+              <SignUpInvite/>
             </Box>
             <FormFooter />
           </div>
