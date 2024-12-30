@@ -565,10 +565,11 @@ html {
   overflow: auto;
 }
 .form-page {
-  max-width: 90rem;
+  width: 94rem;
   height: 64rem;
   max-height: 100vh;
-  width: 86%;
+  max-width: 100%;
+  padding: 0 24px;
   margin: 0 auto;
   justify-content: flex-end;
   display: flex;    
@@ -624,9 +625,8 @@ html {
       max-width: 90%;
       width: 90%;
       margin: 0 auto;
-      height: 100vh;
-      max-height: 100%;
-      overflow: auto;
+      padding: 0;
+      margin-bottom: 60px;      
   }
   .form-container {
       max-width: 100%;
