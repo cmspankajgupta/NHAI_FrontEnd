@@ -40,7 +40,7 @@ const Header = () => {
           sx={{
             justifyContent: "space-between",
             padding: isMobile ? "0 8px" : "0",
-            width: "96rem",
+            width: "94rem",
             maxWidth: "100%",
             margin: '0 auto'
           }}
