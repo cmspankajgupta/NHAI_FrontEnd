@@ -18,6 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 import FormFooter from "../../components/FormFooter/FormFooter";
 import { OtpSchema } from "../OtpForm/OtpSchema";
 import useCountdown from "../../hooks/useCountdown";
+import { toast } from "react-toastify";
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,12 +37,13 @@ const LoginForm = () => {
     validationSchema: OtpSchema,
     onSubmit: async (values) => {
       try {
-        const response = await dispatch(verifyOtp(values.otp));
-        if (response.payload?.success) {
+        alert(values.otp);
+        const res = await dispatch(verifyOtp(values.otp));
+        if (res.payload?.success) {
           await dispatch(setMobile(""));
           navigate("/dashboard");
         } else {
-          console.log("OTP verification failed");
+          toast.error(res?.payload?.message);
         }
       } catch (error) {
         console.error("OTP verification error:", error);
@@ -53,12 +55,12 @@ const LoginForm = () => {
     dispatch(resetOtp());
     dispatch(resetError());
     try {
-      const response = await dispatch(sendOtp(Mobile));
-      if (response.payload?.success) {
+      const res = await dispatch(sendOtp(Mobile));
+      if (res.payload?.success) {
         reset();
         restart();
       } else {
-        console.log("OTP resend failed");
+        toast.error(res?.payload?.message);
       }
     } catch (error) {
       console.error("Error during OTP resend:", error);
@@ -75,7 +77,7 @@ const LoginForm = () => {
         const res = await dispatch(sendOtp(values.mobile));
         if (res?.payload.success) {
         } else {
-          console.log("OTP resend failed");
+          toast.error(res?.payload?.message);
         }
       } catch (error) {
         console.error("Error during OTP resend:", error);
