@@ -1,5 +1,4 @@
-import "./LoginForm.scss";
-import { Box, Divider, CircularProgress } from "@mui/material";
+import { Divider, CircularProgress } from "@mui/material";
 import MuiInput from "../../components/Input/MuiInput";
 import MuiButton from "../../components/Button/MuiButton";
 import { useFormik } from "formik";
@@ -15,7 +14,6 @@ import {
 import { LoginSchema } from "./LoginSchema";
 import OtpForm from "../OtpForm/OtpForm";
 import { Link, useNavigate } from "react-router-dom";
-import FormFooter from "../../components/FormFooter/FormFooter";
 import { OtpSchema } from "../OtpForm/OtpSchema";
 import useCountdown from "../../hooks/useCountdown";
 const LoginForm = () => {
@@ -87,15 +85,6 @@ const LoginForm = () => {
 
   return (
     <>
-      <div className="LoginContainer">
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            padding: 4,
-            paddingBottom: 0,
-          }}
-        >
           {isPhone ? (
             <>
               <p className="head-xs head-black mb-28">Login</p>
@@ -194,9 +183,6 @@ const LoginForm = () => {
               error={error}
             />
           )}
-        </Box>
-        <FormFooter />
-      </div>
     </>
   );
 };
