@@ -1,13 +1,13 @@
 import { Box, Divider, Avatar } from "@mui/material";
 import React from "react";
-import ArrowBack from "../../../assets/images/logo/arrow_back.svg";
+import ArrowBack from "../../../../assets/images/logo/arrow_back.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {
   sendOtp,
   setIsSapVerified,
   setOtpSent,
-} from "../../../store/slices/signUpSlice";
-import MuiButton from "../../../components/Button/MuiButton";
+} from "../../../../store/slices/signUpSlice";
+import MuiButton from "../../../../components/Button/MuiButton";
 
 export default function SignUpDetailsCard() {
   const { data, sapId } = useSelector((state) => state.signUp);

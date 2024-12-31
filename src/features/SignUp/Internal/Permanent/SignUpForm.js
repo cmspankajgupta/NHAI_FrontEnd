@@ -1,8 +1,8 @@
 import "./SignUpForm.scss";
 import { Typography } from "@mui/material";
-import MuiInput from "../../../components/Input/MuiInput";
-import MuiButton from "../../../components/Button/MuiButton";
-import ArrowBack from "../../../assets/images/logo/arrow_back.svg";
+import MuiInput from "../../../../components/Input/MuiInput";
+import MuiButton from "../../../../components/Button/MuiButton";
+import ArrowBack from "../../../../assets/images/logo/arrow_back.svg";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -11,7 +11,7 @@ import {
   setIsSapVerified,
   setSapId,
   verifySapId,
-} from "../../../store/slices/signUpSlice";
+} from "../../../../store/slices/signUpSlice";
 
 const signUpSchema = Yup.object().shape({
   sapId: Yup.string()

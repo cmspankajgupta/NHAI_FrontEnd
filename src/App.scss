@@ -623,6 +623,22 @@ html {
 .getHelp {
   color: var(--brand-500);
 }
+.cardList{
+  padding: 20px 20px;
+  list-style: none;
+}
+.cardList .listItem:not(:last-child){
+  margin-bottom: 14px;
+}
+span.gray-700.col {
+  max-width: 90px;
+}
+
+.details-text{
+  background: var(--signup-form-card-bg);
+  border-radius: 0.5rem;
+}
+
 
 @media screen and (max-width: 767px) {
   .form-page {
