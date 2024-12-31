@@ -15,6 +15,7 @@ import AuthLayout from '../layouts/AuthLayout';
 import PrivateLayout from '../layouts/PrivateLayout';
 import ServicePage from '../pages/ServicePage/ServicePage';
 import withErrorBoundary from '../hoc/withErrorBoundary';
+import AccessForm from '../features/AccessForm/AccessForm';
 
 const AppRoutes = () => {
 
@@ -27,6 +28,7 @@ const AppRoutes = () => {
       <Route path="/signup" element={<PublicRoute><AuthLayout><SignUpPage /></AuthLayout></PublicRoute>} />
       <Route path="/profile/:id" element={<PrivateRoute><PrivateLayout><ProfilePage /></PrivateLayout></PrivateRoute>} />
       <Route path="/dashboard" element={<ProtectedRoute><SomeProtectedPage /></ProtectedRoute>} />
+      <Route path="/AccessForm" element={<AccessForm/>} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

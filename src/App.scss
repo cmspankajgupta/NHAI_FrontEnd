@@ -9,7 +9,8 @@
 }
 
 html {
-    font-size: 0.844vw; /* Base font size */
+  font-size: 0.844vw;
+  /* Base font size */
   // font-size: 12px;
 }
 
@@ -416,6 +417,11 @@ html {
 
 .pt-32 {
   padding-top: 2rem;
+}
+
+.py-16 {
+  padding-bottom: 1rem;
+  padding-top: 1rem;
 }
 
 .pb-32 {
