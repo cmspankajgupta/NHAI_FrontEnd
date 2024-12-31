@@ -15,6 +15,7 @@ const initialState = {
   otp: "",
   isSapVerified: false,
   otpSent: false,
+  inviteAccepted: false,
 };
 
 export const verifySapId = createAsyncThunk(
@@ -26,6 +27,24 @@ export const verifySapId = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(
         error.response?.data || error.message || "Failed to verify"
+      );
+    }
+  }
+);
+
+export const acceptInvite = createAsyncThunk(
+  "signup/acceptInvite",
+  async (mobile, { rejectWithValue }) => {
+    try {
+      const response = await sendOtpAPI({
+        mobile_number: mobile,
+        device_id: "device-" + Math.random().toString(36).substr(2, 9),
+        client_id: envConfig.CLIENT_ID,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data || error.message || "Failed to send OTP"
       );
     }
   }
@@ -86,6 +105,10 @@ const signUpSlice = createSlice({
       state.otpSent = action.payload;
       state.error = "";
     },
+    setInviteAccepted(state,action){
+      state.otpSent = action.payload;
+      state.inviteAccepted= action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -115,6 +138,19 @@ const signUpSlice = createSlice({
         state.error = action.payload;
       });
     builder
+      .addCase(acceptInvite.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(acceptInvite.fulfilled, (state, action) => {
+        state.loading = false;
+        state.otp = "";
+      })
+      .addCase(acceptInvite.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+    builder
       .addCase(verifyOtp.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -130,6 +166,6 @@ const signUpSlice = createSlice({
   },
 });
 
-export const { setIsSapVerified, setSapId, setOtpSent } = signUpSlice.actions;
+export const { setIsSapVerified, setSapId, setOtpSent, setInviteAccepted } = signUpSlice.actions;
 
 export default signUpSlice.reducer;

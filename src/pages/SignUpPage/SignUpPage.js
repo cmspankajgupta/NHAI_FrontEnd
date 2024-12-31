@@ -13,14 +13,18 @@ import {
   setSapId,
   verifyOtp,
 } from "../../store/slices/signUpSlice";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useCountdown from "../../hooks/useCountdown";
 import { setAuthenticated } from "../../store/slices/loginSlice";
 import SignUpContratual from "../../features/SignUp/Internal/SignUpContratual/SignUpContratual";
 import SignUpInvite from "../../features/SignUp/Internal/SignUpContratual/SignUpInviteAccept";
 
 function SignUpPage() {
-  const { isSapVerified, otpSent, data } = useSelector((state) => state.signUp);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const invite = queryParams.get("invite");
+  const mobile = queryParams.get("mobile");
+  const { isSapVerified, otpSent, inviteAccepted, data } = useSelector((state) => state.signUp);
   const { formattedTime, timeLeft, reset, restart } = useCountdown(30);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -87,11 +91,11 @@ function SignUpPage() {
                 paddingBottom: 0,
               }}
             >
-              {/* {!isSapVerified && <SignupForm />}
+              {(!isSapVerified && !invite) && <SignupForm />}
               {isSapVerified && !otpSent && <SignUpDetailsCard />}
-              {isSapVerified && otpSent && <OtpForm formik={formikOTP} handleBack={handleBack} handleResend={handleResendOTP} formattedTime={formattedTime} timeLeft={timeLeft} mobile={data?.mobile}/>} */}
-              {/* <SignUpContratual/> */}
-              <SignUpInvite/>
+              {((isSapVerified && otpSent) || (inviteAccepted && otpSent)) && <OtpForm formik={formikOTP} handleBack={handleBack} handleResend={handleResendOTP} formattedTime={formattedTime} timeLeft={timeLeft} mobile={data?.mobile}/>}
+              {invite && <SignUpContratual mobile={mobile}/>}
+              {/* <SignUpInvite/> */}
             </Box>
             <FormFooter />
           </div>
