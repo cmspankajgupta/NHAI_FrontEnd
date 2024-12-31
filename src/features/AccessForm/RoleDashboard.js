@@ -6,10 +6,10 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import AccessHeader from "./AccessHeader";
 import SidebarAccessForm from "./SidebarAccessForm";
-import MainContentAdminAccess from "./MainContentAdminAccess";
+import MainContentAdminAccess from "./RoleUserList";
 import GenericBreadCrums from "./GenericBreadCrums";
 
-const RolesManagement = () => {
+const RoleDashboard = () => {
   return (
     <>
       <AccessHeader />
@@ -19,7 +19,6 @@ const RolesManagement = () => {
           <h6 className="body-l font-bold">Roles </h6>
           <Button
             variant="contained"
-            // startIcon={}
             sx={{ bgcolor: "#104685", gap: '8px', color: "#ffffff", borderRadius: "100px", padding: '0px 10px', fontSize: '14px', width: "141px", height: "32px", lineHeight: "20px", fontWeight: "500", marginBottom: "18px" }}
           >
             <AddIcon sx={{ width: "18px", height: "18px" }} />
@@ -37,4 +36,4 @@ const RolesManagement = () => {
   );
 };
 
-export default RolesManagement;
+export default RoleDashboard;

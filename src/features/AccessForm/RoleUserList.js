@@ -1,11 +1,11 @@
 import React from "react";
 import {
   Box,
+  Button,
   Paper,
   TableContainer,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import MuiButton from "../../components/Button/MuiButton";
 import "./AccessForm.scss";
 import tickImage from '../../assets/svg/check_small.svg'
 
@@ -27,62 +27,50 @@ const MainContentAdminAccess = () => {
           <h6 className="body-m font-bold">
             Admin
           </h6>
-          <MuiButton
+          {/* <MuiButton
             type="submit"
             name={
-              <>
+              <div style={{display:"flex",alignItems:"center",}}>
                 <EditIcon />
-                Edit
-              </>
+                <label className="body-xs font-medium" color="#104685">Edit</label>
+              </div>
             }
             variant="outlined"
             // fullWidth
             sx={{
-              marginTop: "2rem",
-              borderRadius: "6.25rem",
+              marginTop: "2.667rem",
+              borderRadius: "8.333rem",
               fontWeight: `var(--font-medium)`
             }}
-          />
-        </Box>
-        
-        <TableContainer>
-          {/* <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell className="body-xxs ">Modules</TableCell>
-                <TableCell colSpan={4} sx={{ paddingLeft: '40px' }}>Permissions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {modules.map((module, index) => (
-                <TableRow className="admin-table-row" key={index}>
-                  <TableCell>{module}</TableCell>
-                  <TableCell>
-                    <Checkbox defaultChecked />
-                    <label>Create</label>
-                  </TableCell>
-                  <TableCell>
-                    <Checkbox defaultChecked />
-                    <label>Reports</label>
-                  </TableCell>
-                  <TableCell>
-                    <Checkbox defaultChecked />
-                    <label>View</label>
-                  </TableCell>
-                  <TableCell>
-                    <Checkbox defaultChecked />
-                    <label>Delete</label>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table> */}
+          /> */}
+          <Button
+      variant="outlined"
+      startIcon={<EditIcon sx={{width:"18px", height:"18px"}} />}
+      sx={{
+        color: "#104685", // Adjust to match the blue
+        borderColor: "#9FB5CE", // Light border color
+        textTransform: "none",
+        borderRadius: "20px",
+        lineHeight:"20px",
+        fontSize: "14px",
+        fontWeight: "500",
+        width:"82px",
+        height:"32px",
+        ":hover": {
+          borderColor: "#003366", // Darker hover color
+        },
+      }}
+    >
+      Edit
+    </Button>
+        </Box> 
+        <TableContainer> 
           <div className="table-container"> 
             <table>
               <thead>
                 <tr className="admin-table-head">
                   <th className="access-th-text">MODULES</th>
-                  <th colSpan={4} style={{ paddingLeft: '40px' }}>Permissions</th>
+                  <th colSpan={4} className="access-th-text">PERMISSIONS</th>
                 </tr>
               </thead>
               <tbody>
@@ -92,25 +80,25 @@ const MainContentAdminAccess = () => {
                     <td data-label="Create" className="body-xxs font-medium py-16" >
                      <div className="admin_table_svg admin-table-color"  >
                       <img src={tickImage} alt=""/>
-                      <label>Create</label>
+                      <span>Create</span>
                      </div>
                     </td>
                     <td data-label="Reports"className="body-xxs font-medium">
                      <div className="admin_table_svg admin-table-color">
                       <img src={tickImage} alt=""/>
-                      <label>Reports</label>
+                      <span>Reports</span>
                      </div>
                     </td>
-                    <td data-label="View"className="body-xxs font-medium ">
+                    <td data-span="View"className="body-xxs font-medium ">
                      <div className="admin_table_svg admin-table-color">
                       <img src={tickImage} alt=""/>
-                      <label>View</label>
+                      <span>View</span>
                      </div>
                     </td>
-                    <td data-label="Delete"className="body-xxs font-medium">
+                    <td data-span="Delete"className="body-xxs font-medium">
                      <div className="admin_table_svg admin-table-color">
                       <img src={tickImage} alt=""/>
-                      <label>Delete</label>
+                      <span>Delete</span>
                      </div>
                     </td>
                   </tr>

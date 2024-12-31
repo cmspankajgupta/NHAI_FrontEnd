@@ -40,10 +40,11 @@
 .table-container {
   width: 100%;
   overflow-x: auto; // Adds horizontal scrolling on small screens
-
+ 
   table {
     width: 100%;
     border-collapse: collapse;
+    
 
     th,
     td {
@@ -103,10 +104,8 @@
 }
 .access-th-text{
   font-weight: var(--font-medium);
-  line-height: 1.125rem;
-  font-size: 0.75rem;
+  line-height: 1.5rem;
+  font-size: 1.0rem;
   color:#7A7A7A;
-  width:4.125rem;
-  height: 1.125rem;
 }
 

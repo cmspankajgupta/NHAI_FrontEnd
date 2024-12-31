@@ -13,9 +13,10 @@ const GenericBreadCrums = () => {
     <Breadcrumbs sx={{ textAlign: 'center', display: 'flex' }} separator={
       <p
         style={{
-          fontSize: `var( --font-size-lg: 1.5rem)`, // Adjust size of the separator
-          lineHeight: "1.125rem",
-          marginRight: "0.5rem",
+          fontSize: `var( --font-size-lg)`, // Adjust size of the separator
+          lineHeight: "1.5rem",
+          marginRight: "0.667rem",
+          color:"#9FB5CE",
         }}
       >
         ›
@@ -31,7 +32,7 @@ const GenericBreadCrums = () => {
           alignItems: "center",
         }}
       >
-        <HomeIcon  sx={{ marginRight: "0.5rem", width: "1.125rem", height: "1.125rem", }} />
+        <HomeIcon  sx={{ marginRight: "0.667rem", width: "1.5rem", height: "1.5rem",color:"#7090B6" }} />
       </Link>
       <Link
         underline="hover"
@@ -39,23 +40,23 @@ const GenericBreadCrums = () => {
         href="/access-management"
         onClick={handleClick}
         sx={{
-          fontSize: "0.75rem", // Adjust size of Access Management text
-          width:"7.5rem",
-          height:"1.125rem",
+          fontSize: "0.8rem", // Adjust size of Access Management text
+          width:"10rem",
+          height:"1.5rem",
           fontWeight: "500",
-          lineHeight: "1.125rem",
-          color: "#7080B6", // Adjust color if needed
-          marginRight: "0.5rem",
+          lineHeight: "1.5rem",
+          color: "#406B9D", // Adjust color if needed
+          marginRight: "0.667rem",
         }}
       >
         Access Management
       </Link>
       <Typography color="text.primary" sx={{
-        fontSize: "12px", // Adjust size of Access Management text
+        fontSize: "1rem", // Adjust size of Access Management text
         fontWeight: "500",
-        lineHeight: "1.125rem",
+        lineHeight: "1.5rem",
         color: "#757575", // Adjust color if needed
-        marginRight: "0.5rem",
+        marginRight: "0.667rem",
       }}>Roles</Typography>
     </Breadcrumbs>
   </div>
