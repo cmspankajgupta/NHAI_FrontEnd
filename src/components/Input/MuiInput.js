@@ -4,10 +4,10 @@ import "./MuiInput.scss";
 import { Typography } from "@mui/material";
 
 function MuiInput({
-  variant,
-  label,
+  // variant,
+  // label,
   className,
-  sx,
+  // sx,
   error,
   errorText,
   ...props
@@ -16,11 +16,6 @@ function MuiInput({
     <>
       <TextField
         {...props}
-        sx={sx}
-        id="outlined-basic"
-        variant={variant}
-        label={label}
-        // placeholder={label}
         error={error}
         className="muiInput"
       />
@@ -28,7 +23,7 @@ function MuiInput({
         <Typography
           color="error"
           sx={{
-            color: "#d32f2f", // Error color
+            color: "#d32f2f",
             fontWeight: 400,
             fontSize: "0.75rem",
             letterSpacing: "0.03333em",
@@ -38,7 +33,7 @@ function MuiInput({
             marginLeft: "1px",
           }}
         >
-          {errorText}
+        {errorText}
         </Typography>
       )}
     </>
