@@ -31,6 +31,7 @@ function MuiInput({
             marginRight: "14px",
             marginBottom: "0",
             marginLeft: "1px",
+            fontFamily: 'Inter'
           }}
         >
         {errorText}

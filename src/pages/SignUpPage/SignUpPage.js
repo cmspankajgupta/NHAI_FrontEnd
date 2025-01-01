@@ -19,6 +19,7 @@ import { setAuthenticated } from "../../store/slices/loginSlice";
 import SignUpContratual from "../../features/SignUp/Internal/Contratual/SignUpContratual";
 import SignUpInvite from "../../features/SignUp/Internal/Contratual/SignUpInviteAccept";
 import ModalContractComReg from "../../features/SignUp/Internal/Contratual/ModalContractComReg";
+import EmailOtpForm from "../../features/EmailOtpForm/EmailOtpForm";
 
 function SignUpPage() {
   const { isSapVerified, otpSent, data } = useSelector((state) => state.signUp);
@@ -94,6 +95,7 @@ function SignUpPage() {
               {/* <SignUpContratual/> */}
               <SignUpInvite/>
               <ModalContractComReg/>
+              {/* <EmailOtpForm/> */}
             </Box>
             <FormFooter />
           </div>
