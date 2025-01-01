@@ -10,6 +10,9 @@ import MainContentAdminAccess from "./RoleUserList";
 import GenericBreadCrums from "./GenericBreadCrums";
 
 const RoleDashboard = () => {
+  const handleClick =()=>{
+    
+  }
   return (
     <>
       <AccessHeader />
@@ -20,6 +23,7 @@ const RoleDashboard = () => {
           <Button
             variant="contained"
             sx={{ bgcolor: "#104685", gap: '8px', color: "#ffffff", borderRadius: "100px", padding: '0px 10px', fontSize: '14px', width: "141px", height: "32px", lineHeight: "20px", fontWeight: "500", marginBottom: "18px" }}
+          onClick={handleClick}
           >
             <AddIcon sx={{ width: "18px", height: "18px" }} />
             Create Role
