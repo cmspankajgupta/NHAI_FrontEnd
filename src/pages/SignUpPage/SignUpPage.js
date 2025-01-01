@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import OtpForm from "../../features/OtpForm/OtpForm";
-import SignUpDetailsCard from "../../features/SignUp/Internal/Permanent/SignUpDetailsCard";
 import SignupForm from "../../features/SignUp/Internal/Permanent/SignUpForm";
+import SignUpDetailsCard from "../../features/SignUp/Internal/Permanent/SignUpDetailsCard";
 import FormFooter from "../../components/FormFooter/FormFooter";
 import { OtpSchema } from "../../features/OtpForm/OtpSchema";
 import { useFormik } from "formik";
@@ -19,8 +19,6 @@ import useCountdown from "../../hooks/useCountdown";
 import { setAuthenticated } from "../../store/slices/loginSlice";
 import SignUpContratual from "../../features/SignUp/Internal/Contratual/SignUpContratual";
 import SignUpInvite from "../../features/SignUp/Internal/Contratual/SignUpInviteAccept";
-import ModalContractComReg from "../../features/SignUp/Internal/Contratual/ModalContractComReg";
-import EmailOtpForm from "../../features/EmailOtpForm/EmailOtpForm";
 
 function SignUpPage() {
   const location = useLocation();
