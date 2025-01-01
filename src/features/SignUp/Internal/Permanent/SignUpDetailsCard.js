@@ -1,15 +1,13 @@
 import { Box, Divider, Avatar } from "@mui/material";
 import React from "react";
-import ArrowBack from "../../../assets/images/logo/arrow_back.svg";
+import ArrowBack from "../../../../assets/images/logo/arrow_back.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {
   sendOtp,
   setIsSapVerified,
   setOtpSent,
-} from "../../../store/slices/signUpSlice";
-import MuiButton from "../../../components/Button/MuiButton";
-import { formatDate } from "../../../utils/formatters";
-import dayjs from "dayjs";
+} from "../../../../store/slices/signUpSlice";
+import MuiButton from "../../../../components/Button/MuiButton";
 
 export default function SignUpDetailsCard() {
   const { data, sapId } = useSelector((state) => state.signUp);
@@ -68,24 +66,20 @@ export default function SignUpDetailsCard() {
             <li className="listItem body-xxs row">
               <span className="gray-700 col">Mobile Number</span>
               <span className="col gray-800 font-medium">
-                {data?.mobile_number ? `+91 ${data?.mobile_number}` : null}
+                {data?.mobile ? `+91 ${data?.mobile}` : null}
               </span>
             </li>
             <li className="listItem body-xxs row">
               <span className="gray-700 col">Date of Birth</span>
-              <span className="col gray-800 font-medium">
-                {dayjs(data?.date_of_birth).format("DD/MM/YYYY")}
-              </span>
+              <span className="col gray-800 font-medium">{data?.dob}</span>
             </li>
             <li className="listItem body-xxs row">
               <span className="gray-700 col">Email ID</span>
-              <span className="col gray-800 font-medium">{data?.email_id}</span>
+              <span className="col gray-800 font-medium">{data?.email}</span>
             </li>
             <li className="listItem body-xxs row">
               <span className="gray-700 col">Office Location</span>
-              <span className="col gray-800 font-medium">
-                {data?.office_location}
-              </span>
+              <span className="col gray-800 font-medium">{data?.office}</span>
             </li>
           </ul>
         </Box>
