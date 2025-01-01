@@ -16,6 +16,7 @@ const initialState = {
   isSapVerified: false,
   otpSent: false,
   inviteAccepted: false,
+  inviteDone: false,
 };
 
 export const verifySapId = createAsyncThunk(
@@ -105,9 +106,12 @@ const signUpSlice = createSlice({
       state.otpSent = action.payload;
       state.error = "";
     },
-    setInviteAccepted(state,action){
+    setInviteAccepted(state, action){
       state.otpSent = action.payload;
       state.inviteAccepted= action.payload;
+    },
+    setInviteDone(state, action){
+      state.inviteDone= action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -166,6 +170,6 @@ const signUpSlice = createSlice({
   },
 });
 
-export const { setIsSapVerified, setSapId, setOtpSent, setInviteAccepted } = signUpSlice.actions;
+export const { setIsSapVerified, setSapId, setOtpSent, setInviteAccepted, setInviteDone } = signUpSlice.actions;
 
 export default signUpSlice.reducer;

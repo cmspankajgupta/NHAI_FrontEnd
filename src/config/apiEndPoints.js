@@ -2,7 +2,7 @@ import axiosInstance from "./axiosConfig";
 
 export const Login = async (payload) => {
   return await axiosInstance.post(
-    "/3daecfc6-6473-4794-ad0b-4c8ef29f314c",
+    "/6037160c-0f6c-4598-97b7-33deabbe7798",
     payload
   );
 };
@@ -14,14 +14,14 @@ export const verifyOtpPerLogin = async (payload) => {
 };
 export const verifySapId = async (payload) => {
   return await axiosInstance.post(
-    "/c53b07ef-2bf9-4fa5-9a3b-453de64b738d",
+    "/97c7ee92-8a63-4655-be15-8d9e2ae6c5a5",
     payload
   );
 };
 
 export const sendOtp = async (payload) => {
   return await axiosInstance.post(
-    "/3daecfc6-6473-4794-ad0b-4c8ef29f314c",
+    "/6037160c-0f6c-4598-97b7-33deabbe7798",
     payload
   );
 };

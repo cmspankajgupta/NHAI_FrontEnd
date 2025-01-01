@@ -8,6 +8,8 @@ import {
   setOtpSent,
 } from "../../../store/slices/signUpSlice";
 import MuiButton from "../../../components/Button/MuiButton";
+import { formatDate } from "../../../utils/formatters";
+import dayjs from "dayjs";
 
 export default function SignUpDetailsCard() {
   const { data, sapId } = useSelector((state) => state.signUp);
@@ -66,20 +68,24 @@ export default function SignUpDetailsCard() {
             <li className="listItem body-xxs row">
               <span className="gray-700 col">Mobile Number</span>
               <span className="col gray-800 font-medium">
-                {data?.mobile ? `+91 ${data?.mobile}` : null}
+                {data?.mobile_number ? `+91 ${data?.mobile_number}` : null}
               </span>
             </li>
             <li className="listItem body-xxs row">
               <span className="gray-700 col">Date of Birth</span>
-              <span className="col gray-800 font-medium">{data?.dob}</span>
+              <span className="col gray-800 font-medium">
+                {dayjs(data?.date_of_birth).format("DD/MM/YYYY")}
+              </span>
             </li>
             <li className="listItem body-xxs row">
               <span className="gray-700 col">Email ID</span>
-              <span className="col gray-800 font-medium">{data?.email}</span>
+              <span className="col gray-800 font-medium">{data?.email_id}</span>
             </li>
             <li className="listItem body-xxs row">
               <span className="gray-700 col">Office Location</span>
-              <span className="col gray-800 font-medium">{data?.office}</span>
+              <span className="col gray-800 font-medium">
+                {data?.office_location}
+              </span>
             </li>
           </ul>
         </Box>
