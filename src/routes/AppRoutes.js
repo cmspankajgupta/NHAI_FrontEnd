@@ -18,7 +18,6 @@ import withErrorBoundary from '../hoc/withErrorBoundary';
 import RoleDashboard from '../features/AccessForm/RoleDashboard';
 
 const AppRoutes = () => {
-
   const ServicePageWithErrorBoundary = withErrorBoundary(ServicePage);
   return (
     <Routes>

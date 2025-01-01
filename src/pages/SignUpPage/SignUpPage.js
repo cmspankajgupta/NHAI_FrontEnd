@@ -1,28 +1,32 @@
 import { Box } from "@mui/material";
 import OtpForm from "../../features/OtpForm/OtpForm";
-import SignUpDetailsCard from "../../features/SignUp/Internal/Permanent/SignUpDetailsCard";
 import SignupForm from "../../features/SignUp/Internal/Permanent/SignUpForm";
+import SignUpDetailsCard from "../../features/SignUp/Internal/Permanent/SignUpDetailsCard";
 import FormFooter from "../../components/FormFooter/FormFooter";
 import { OtpSchema } from "../../features/OtpForm/OtpSchema";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import {
   sendOtp,
+  setInviteDone,
   setIsSapVerified,
   setOtpSent,
   setSapId,
   verifyOtp,
 } from "../../store/slices/signUpSlice";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useCountdown from "../../hooks/useCountdown";
 import { setAuthenticated } from "../../store/slices/loginSlice";
 import SignUpContratual from "../../features/SignUp/Internal/Contratual/SignUpContratual";
 import SignUpInvite from "../../features/SignUp/Internal/Contratual/SignUpInviteAccept";
-import ModalContractComReg from "../../features/SignUp/Internal/Contratual/ModalContractComReg";
-import EmailOtpForm from "../../features/EmailOtpForm/EmailOtpForm";
 
 function SignUpPage() {
-  const { isSapVerified, otpSent, data } = useSelector((state) => state.signUp);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const invite = queryParams.get("invite");
+  const mobile = queryParams.get("mobile");
+  const { isSapVerified, otpSent, inviteAccepted, inviteDone, data } =
+    useSelector((state) => state.signUp);
   const { formattedTime, timeLeft, reset, restart } = useCountdown(30);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,12 +39,16 @@ function SignUpPage() {
       try {
         const res = await dispatch(verifyOtp(values.otp));
         if (res.payload?.success) {
-          localStorage.setItem('token', res?.payload?.data?.token);
-          await dispatch(setAuthenticated(true))
-          navigate("/dashboard");
+          localStorage.setItem("token", res?.payload?.data?.token);
+          await dispatch(setAuthenticated(true));
           dispatch(setIsSapVerified(false));
           dispatch(setSapId(""));
           dispatch(setOtpSent(false));
+          if (mobile && invite) {
+            dispatch(setInviteDone(true));
+          } else {
+            navigate("/dashboard");
+          }
         } else {
           console.log("OTP verification failed");
         }
@@ -53,7 +61,7 @@ function SignUpPage() {
   const handleBack = () => {
     dispatch(setIsSapVerified(true));
     dispatch(setOtpSent(false));
-  }
+  };
 
   const handleResendOTP = async () => {
     // dispatch(resetOtp());
@@ -89,13 +97,22 @@ function SignUpPage() {
                 paddingBottom: 0,
               }}
             >
-              {/* {!isSapVerified && <SignupForm />}
+              {!isSapVerified && !invite && <SignupForm />}
               {isSapVerified && !otpSent && <SignUpDetailsCard />}
-              {isSapVerified && otpSent && <OtpForm formik={formikOTP} handleBack={handleBack} handleResend={handleResendOTP} formattedTime={formattedTime} timeLeft={timeLeft} mobile={data?.mobile}/>} */}
-              {/* <SignUpContratual/> */}
-              <SignUpInvite/>
-              <ModalContractComReg/>
-              {/* <EmailOtpForm/> */}
+              {((isSapVerified && otpSent) || (inviteAccepted && otpSent)) && (
+                <OtpForm
+                  formik={formikOTP}
+                  handleBack={handleBack}
+                  handleResend={handleResendOTP}
+                  formattedTime={formattedTime}
+                  timeLeft={timeLeft}
+                  mobile={data?.mobile}
+                />
+              )}
+              {invite && !otpSent && !inviteDone && (
+                <SignUpContratual mobile={mobile} />
+              )}
+              {inviteDone && <SignUpInvite />}
             </Box>
             <FormFooter />
           </div>
