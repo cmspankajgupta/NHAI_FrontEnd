@@ -15,10 +15,7 @@ const style = {
   p: 4,
 };
 
-export default function MuiModal({ title, content, children, ...props }) {
-  const [open, setOpen] = React.useState(true);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+export default function MuiModal({ title, content, children, open, handleOpen, handleClose, ...props }) {
 
   return (
     <div>
@@ -27,9 +24,10 @@ export default function MuiModal({ title, content, children, ...props }) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        disableAutoFocus
       >
         <Box sx={style}>
-        <img src={closeIcons} alt="CloseIcons"  style={{position:'absolute', width: '1.5rem', right:'16px', top: '16px'}}/>
+        <img src={closeIcons} alt="CloseIcons"  style={{position:'absolute', width: '1.5rem', right:'16px', top: '16px'}} onClick={handleClose}/>
           <p id="modal-modal-title" className="body-m font-bold mb-14">
             {title}
           </p>

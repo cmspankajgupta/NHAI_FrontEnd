@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import {
   sendOtp,
+  setInviteAccepted,
   setInviteDone,
   setIsSapVerified,
   setOtpSent,
@@ -59,8 +60,12 @@ function SignUpPage() {
   });
 
   const handleBack = () => {
-    dispatch(setIsSapVerified(true));
     dispatch(setOtpSent(false));
+    if(mobile && invite){
+      dispatch(setInviteAccepted(false));
+    }else{
+      dispatch(setIsSapVerified(true));
+    }
   };
 
   const handleResendOTP = async () => {
