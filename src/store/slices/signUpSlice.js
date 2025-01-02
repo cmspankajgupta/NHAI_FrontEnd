@@ -17,6 +17,11 @@ const initialState = {
   otpSent: false,
   inviteAccepted: false,
   inviteDone: false,
+  completeReg: false,
+  regConsent: false,
+  completeRegVerify: false,
+  regSuccessfull: false,
+  isDigiAuthCompleted: false,
 };
 
 export const verifySapId = createAsyncThunk(
@@ -90,6 +95,54 @@ export const verifyOtp = createAsyncThunk(
   }
 );
 
+export const completeRegDigi = createAsyncThunk(
+  "signUp/completeRegDigi",
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const { email, contract_ID } = getState().signUp;
+
+      // const response = await verifyOtpAPI({
+      //   // mobile_number: mobile,
+      //   // otp: otp,
+      //   device_id: "device-" + Math.random().toString(36).substr(2, 9),
+      //   client_id: envConfig.CLIENT_ID,
+      // });
+      return {
+        success: true,
+        email: email,
+        contract_ID: contract_ID,
+      };
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data || error.message || "Failed to verify OTP"
+      );
+    }
+  }
+);
+
+export const acceptConsent = createAsyncThunk(
+  "signUp/acceptConsent",
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const { terms, getUpdates } = getState().signUp;
+
+      // const response = await verifyOtpAPI({
+      //   // mobile_number: mobile,
+      //   // otp: otp,
+      //   device_id: "device-" + Math.random().toString(36).substr(2, 9),
+      //   client_id: envConfig.CLIENT_ID,
+      // });
+      return {
+        success: true,
+      };
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data || error.message || "Failed to verify OTP"
+      );
+    }
+  }
+);
+
 // Create slice
 const signUpSlice = createSlice({
   name: "signUp",
@@ -106,13 +159,28 @@ const signUpSlice = createSlice({
       state.otpSent = action.payload;
       state.error = "";
     },
-    setInviteAccepted(state, action){
+    setInviteAccepted(state, action) {
       state.otpSent = action.payload;
-      state.inviteAccepted= action.payload;
+      state.inviteAccepted = action.payload;
     },
-    setInviteDone(state, action){
-      state.inviteDone= action.payload;
-    }
+    setInviteDone(state, action) {
+      state.inviteDone = action.payload;
+    },
+    setCompleteReg(state, action) {
+      state.completeReg = action.payload;
+    },
+    setRegConsent(state, action) {
+      state.regConsent = action.payload;
+    },
+    setCompleteRegVerify(state, action) {
+      state.completeRegVerify = action.payload;
+    },
+    setRegSuccessfull(state, action) {
+      state.regSuccessfull = action.payload;
+    },
+    setIsDigiAuthCompleted(state, action) {
+      state.isDigiAuthCompleted = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -167,9 +235,32 @@ const signUpSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
+    builder
+      .addCase(completeRegDigi.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(completeRegDigi.fulfilled, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(completeRegDigi.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 });
 
-export const { setIsSapVerified, setSapId, setOtpSent, setInviteAccepted, setInviteDone } = signUpSlice.actions;
+export const {
+  setIsSapVerified,
+  setSapId,
+  setOtpSent,
+  setInviteAccepted,
+  setInviteDone,
+  setCompleteReg,
+  setRegConsent,
+  setCompleteRegVerify,
+  setRegSuccessfull,
+  setIsDigiAuthCompleted,
+} = signUpSlice.actions;
 
 export default signUpSlice.reducer;

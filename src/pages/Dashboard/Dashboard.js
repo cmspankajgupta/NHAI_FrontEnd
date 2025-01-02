@@ -1,9 +1,10 @@
 import React from 'react'
+import ModalContractComReg from '../../features/SignUp/Internal/Contratual/ModalContractComReg'
 
 function Dashboard() {
   return (
     <div>
-      <h2>Dashboard</h2>
+      <ModalContractComReg />
     </div>
   )
 }
