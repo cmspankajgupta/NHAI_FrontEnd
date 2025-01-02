@@ -16,6 +16,7 @@ import PrivateLayout from '../layouts/PrivateLayout';
 import ServicePage from '../pages/ServicePage/ServicePage';
 import withErrorBoundary from '../hoc/withErrorBoundary';
 import RoleDashboard from '../features/AccessForm/RoleDashboard';
+import CreateRoleAccess from '../features/AccessForm/CreateRole/CreateRoleAccess'
 
 const AppRoutes = () => {
 
