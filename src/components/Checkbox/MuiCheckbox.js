@@ -1,10 +1,10 @@
 import Checkbox from '@mui/material/Checkbox';
 
-export default function MuiCheckbox({ label, ...props}) {
+export default function MuiCheckbox({ label, id, ...props}) {
   return (
     <div className='flex items-start'>
-      <Checkbox {...props} sx={{padding: '0 8px 8px'}}/>
-      <label className='body-xxs font-regular'>{label}</label>
+      <Checkbox id={id} {...props} sx={{padding: '8px'}}/>
+      <label htmlFor={id} className='body-xxs font-regular cursor-pointer' style={{paddingTop: '10px'}}>{label}</label>
     </div>
     
   );

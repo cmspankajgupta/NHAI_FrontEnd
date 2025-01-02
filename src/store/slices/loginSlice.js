@@ -16,7 +16,7 @@ const initialState = {
   loadingVerify: false,
   error: null,
   otpVerified: false,
-  isAuthenticated: false,
+  isAuthenticated: Boolean(localStorage.getItem("token")) || false,
   isResend: false,
 };
 
@@ -123,7 +123,7 @@ const loginSlice = createSlice({
       .addCase(verifyOtp.fulfilled, (state, action) => {
         state.loadingVerify = false;
         state.otpVerified = true;
-        const token = action.payload.token;
+        const token = action.payload.data?.access_token;
         localStorage.setItem("token", token);
         state.isAuthenticated = true;
       })

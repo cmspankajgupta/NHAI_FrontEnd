@@ -3,6 +3,7 @@ import { Box, CssBaseline } from "@mui/material";
 import Sidebar from '../../components/Sidebar/Sidebar';
 import TopBar from '../../components/TopBar/TopBar';
 import ContentGrid from '../../components/ContentGrid/ContentGrid';
+import Dashboard from '../Dashboard/Dashboard';
 
 function SomeProtectedPage() {
   return (
@@ -23,7 +24,7 @@ function SomeProtectedPage() {
       >
         {/* Top Bar */}
         <TopBar />
-
+        <Dashboard />
         {/* Grid Content */}
         <ContentGrid />
       </Box>
