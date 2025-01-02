@@ -1,0 +1,85 @@
+.table-container {
+    width: 100%;
+    padding: 1.9rem 3.33rem 0 3.33rem;
+    overflow-x: auto; // Adds horizontal scrolling on small screens
+   
+    table {
+      width: 100%;
+      border-collapse: collapse;  
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+      }
+    }
+    // Responsiveness: For screens smaller than 768px
+    @media (max-width: 768px) {
+      table,
+      th,
+      td {
+        display: block;
+      }
+  
+      th,
+      td {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 10px ;
+      }
+  
+      th {
+        position: absolute;
+        left: -9999px; // Hide header text
+      }
+  
+      td {
+        position: relative;
+        padding-left: 50%;
+      }
+  
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+      }
+  
+      td label {
+        display: inline-block;
+        padding-left: 10px;
+      }
+    }
+  }
+
+  .create-table-head{
+    font-size: 12px;
+    font-weight: 500px;
+    line-height: 18px;
+  }
+  .access-th-text{
+    font-weight: var(--font-medium);
+    line-height: 1.5rem;
+    font-size: 1.0rem;
+    color:#7A7A7A;
+  }
+  .create-table-color{
+    margin: 0rem 0;
+    color:#757575;
+  }
+
+  .create-body-s{
+    color: #757575;
+    font-size: 1rem;
+    font-style: normal;
+    line-height: 1.5rem;
+    letter-spacing: -0.005rem;
+  }
+  .create-table-head{
+    border-bottom: 1.2px solid #cfdae7;
+  }
+
+  .py1{
+    padding-top: 2.25rem;
+    padding-bottom: 2.25rem;
+  }
