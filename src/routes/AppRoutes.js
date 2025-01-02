@@ -19,7 +19,6 @@ import RoleDashboard from '../features/AccessForm/RoleDashboard';
 import CreateRoleAccess from '../features/AccessForm/CreateRole/CreateRoleAccess'
 
 const AppRoutes = () => {
-
   const ServicePageWithErrorBoundary = withErrorBoundary(ServicePage);
   return (
     <Routes>
