@@ -38,6 +38,7 @@ function SignUpPage() {
     validationSchema: OtpSchema,
     onSubmit: async (values) => {
       try {
+        formikOTP.setSubmitting(true);
         const res = await dispatch(verifyOtp(values.otp));
         if (res.payload?.success) {
           localStorage.setItem("token", res?.payload?.data?.token);
@@ -55,15 +56,17 @@ function SignUpPage() {
         }
       } catch (error) {
         console.error("OTP verification error:", error);
+      }finally{
+        formikOTP.setSubmitting(false)
       }
     },
   });
 
   const handleBack = () => {
     dispatch(setOtpSent(false));
-    if(mobile && invite){
+    if (mobile && invite) {
       dispatch(setInviteAccepted(false));
-    }else{
+    } else {
       dispatch(setIsSapVerified(true));
     }
   };
