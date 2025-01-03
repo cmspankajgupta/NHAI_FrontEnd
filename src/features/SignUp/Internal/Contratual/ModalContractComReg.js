@@ -22,6 +22,7 @@ import {
   setRegSuccessfull,
   verifyOtp,
 } from "../../../../store/slices/signUpSlice";
+import { CircularProgress } from "@mui/material";
 
 // Define validation for complete reg form fields
 export const CompleteRegSchema = Yup.object().shape({
@@ -49,6 +50,7 @@ export default function ModalContractComReg() {
     validationSchema: CompleteRegSchema,
     onSubmit: async (values) => {
       try {
+        formikReg.setSubmitting(true);
         const res = await dispatch(completeRegDigi(values));
         if (res.payload?.success) {
           dispatch(setCompleteReg(false));
@@ -58,6 +60,8 @@ export default function ModalContractComReg() {
         }
       } catch (error) {
         console.error("OTP verification error:", error);
+      } finally {
+        formikReg.setSubmitting(false);
       }
     },
   });
@@ -69,6 +73,7 @@ export default function ModalContractComReg() {
     validationSchema: OtpSchema,
     onSubmit: async (values) => {
       try {
+        formikOTP.setSubmitting(true);
         const res = await dispatch(verifyOtp(values.otp));
         if (res.payload?.success) {
           dispatch(setCompleteReg(false));
@@ -79,6 +84,8 @@ export default function ModalContractComReg() {
         }
       } catch (error) {
         console.error("OTP verification error:", error);
+      } finally {
+        formikOTP.setSubmitting(false);
       }
     },
   });
@@ -90,6 +97,7 @@ export default function ModalContractComReg() {
     },
     onSubmit: async (values) => {
       try {
+        formikConsent.setSubmitting(true);
         const res = await dispatch(acceptConsent(values));
         if (res.payload?.success) {
           dispatch(setRegConsent(false));
@@ -99,6 +107,8 @@ export default function ModalContractComReg() {
         }
       } catch (error) {
         console.error("OTP verification error:", error);
+      } finally {
+        formikConsent.setSubmitting(false);
       }
     },
   });
@@ -119,9 +129,9 @@ export default function ModalContractComReg() {
     }
   };
 
-  const handleClose = ()=>{
+  const handleClose = () => {
     dispatch(setIsDigiAuthCompleted(true));
-  }
+  };
 
   useEffect(() => {
     if (!isDigiAuthCompleted) {
@@ -138,7 +148,7 @@ export default function ModalContractComReg() {
             : ""
         }`}
         open={!isDigiAuthCompleted}
-        handleClose={regSuccessfull? handleClose : null}
+        handleClose={regSuccessfull ? handleClose : null}
       >
         {(completeReg || regConsent) && (
           <div className="details-text mt-32 mb-14">
@@ -208,6 +218,12 @@ export default function ModalContractComReg() {
                 borderRadius: "6.25rem",
                 fontWeight: `var(--font-medium)`,
               }}
+              disabled={formikReg.isSubmitting}
+              endIcon={
+                formikReg.isSubmitting ? (
+                  <CircularProgress size={13} color="white" />
+                ) : null
+              }
             />
           </form>
         )}
@@ -239,6 +255,12 @@ export default function ModalContractComReg() {
                 fontWeight: `var(--font-medium)`,
                 mt: 4,
               }}
+              disabled={formikOTP.isSubmitting}
+              endIcon={
+                formikOTP.isSubmitting ? (
+                  <CircularProgress size={13} color="white" />
+                ) : null
+              }
             />
           </form>
         )}
@@ -284,7 +306,14 @@ export default function ModalContractComReg() {
                 fontWeight: `var(--font-medium)`,
                 mt: 4,
               }}
-              disabled={!formikConsent.values.terms}
+              disabled={
+                !formikConsent.values.terms || formikConsent.isSubmitting
+              }
+              endIcon={
+                formikConsent.isSubmitting ? (
+                  <CircularProgress size={13} color="white" />
+                ) : null
+              }
             />
           </form>
         )}

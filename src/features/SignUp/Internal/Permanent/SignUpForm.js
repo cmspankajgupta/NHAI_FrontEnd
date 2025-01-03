@@ -1,5 +1,5 @@
 import "./SignUpForm.scss";
-import { Typography } from "@mui/material";
+import { CircularProgress, Typography } from "@mui/material";
 import MuiInput from "../../../../components/Input/MuiInput";
 import MuiButton from "../../../../components/Button/MuiButton";
 import ArrowBack from "../../../../assets/images/logo/arrow_back.svg";
@@ -30,6 +30,7 @@ const SignupForm = () => {
     validationSchema: signUpSchema,
     onSubmit: async (values) => {
       try {
+        formik.setSubmitting(true);
         dispatch(setSapId(values.sapId));
         const res = await dispatch(verifySapId(values));
         if (res.payload?.success) {
@@ -39,6 +40,8 @@ const SignupForm = () => {
         }
       } catch (error) {
         console.error("SAP ID verification error:", error);
+      }finally{
+        formik.setSubmitting(false)
       }
     },
   });
@@ -107,6 +110,12 @@ const SignupForm = () => {
             borderRadius: "6.25rem",
             fontWeight: `var(--font-medium)`,
           }}
+          disabled={formik.isSubmitting}
+          endIcon={
+            formik.isSubmitting ? (
+              <CircularProgress size={13} color="white" />
+            ) : null
+          }
         />
       </form>
     </>
