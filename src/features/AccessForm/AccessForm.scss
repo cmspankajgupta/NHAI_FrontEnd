@@ -109,3 +109,8 @@
   color:#7A7A7A;
 }
 
+@media (max-width: 760px) {
+  .paper-classss {
+    display: none !important;
+  }
+}

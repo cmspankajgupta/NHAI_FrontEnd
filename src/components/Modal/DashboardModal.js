@@ -1,11 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { Divider } from '@mui/material';
-import MuiInput from '../../components/Input/MuiInput';
 import CloseIcon from '@mui/icons-material/Close';
-import MuiButton from '../../components/Button/MuiButton';
-
 
 
 export default function DashboardModal({ title, content, children, openModal, showModal, style, ...props }) {
