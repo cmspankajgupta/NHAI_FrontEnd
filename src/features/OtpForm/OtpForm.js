@@ -171,7 +171,7 @@ const OtpForm = ({
           name="Verify OTP"
           variant="contained"
           fullWidth
-          disabeld={formik.isSubmitting}
+          disabled={formik.isSubmitting}
           endIcon={
             formik.isSubmitting ? (
               <CircularProgress size={13} color="white" />

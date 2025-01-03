@@ -24,10 +24,10 @@ export default function MuiModal({ title, content, children, open, handleOpen, h
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        disableAutoFocus
+        disableEnforceFocus
       >
         <Box sx={style}>
-        <img src={closeIcons} alt="CloseIcons"  style={{position:'absolute', width: '1.5rem', right:'16px', top: '16px'}} onClick={handleClose}/>
+        <img src={closeIcons} alt="CloseIcons" className="cursor-pointer"  style={{position:'absolute', width: '1.5rem', right:'16px', top: '16px'}} onClick={handleClose}/>
           <p id="modal-modal-title" className="body-m font-bold mb-14">
             {title}
           </p>
