@@ -1,7 +1,7 @@
 import React from 'react'
 import MuiButton from '../../../../components/Button/MuiButton'
 
-export default function SignUpContratual() {
+export default function SignUpExAgency() {
   return (
     <>
         <div className='cont-form-container'>
