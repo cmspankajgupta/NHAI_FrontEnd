@@ -10,7 +10,8 @@ export default function SignUpInvite() {
     const timer = setInterval(() => {
       setProgress((oldProgress) => {
         if (oldProgress >= 100) {
-          navigate('/dashboard');
+          // window.location.replace('https://digilocker.meripehchaan.gov.in/public/oauth2/1/authorize?response_type=code&client_id=VY8E53529D&state=oidc_flow&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fmyauth&code_challenge=tiw8rb7oWos6onyTiOzI4_AOokGVVzB-9dc9l4GbJ4A&code_challenge_method=S256&dl_flow=signin&scope=files.uploadeddocs+files.issueddocs+userdetails+email+address+picture');
+          navigate('/dashboard?contract=true');
           // clearInterval(timer); // Stop the timer when progress reaches 100
           return 100; // Ensure progress stays at 100
         }

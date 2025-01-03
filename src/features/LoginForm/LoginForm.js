@@ -35,6 +35,7 @@ const LoginForm = () => {
     validationSchema: OtpSchema,
     onSubmit: async (values) => {
       try {
+        formikOTP.setSubmitting(true);
         const res = await dispatch(verifyOtp(values.otp));
         if (res.payload?.success) {
           await dispatch(setMobile(""));
@@ -44,6 +45,8 @@ const LoginForm = () => {
         }
       } catch (error) {
         console.error("OTP verification error:", error);
+      }finally{
+        formikOTP.setSubmitting(false)
       }
     },
   });
