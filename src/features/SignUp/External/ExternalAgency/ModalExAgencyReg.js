@@ -51,7 +51,6 @@ export default function ModalExAgencyReg() {
           </div>}
           {true && <AddSpocExAgency/>}          
         </MuiModal>
-        
     </>
   )
 }
