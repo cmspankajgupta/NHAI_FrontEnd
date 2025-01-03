@@ -3,6 +3,7 @@ import loginReducer from "./slices/loginSlice";
 import fetchReducer from './slices/fetchSlice';
 import authReducer from './slices/authSlice';
 import signUpReducer from './slices/signUpSlice';
+import accessManagementSlice from './slices/accessManagementSlice';
 
 
 const store = configureStore({
@@ -11,6 +12,7 @@ const store = configureStore({
     fetch: fetchReducer,
     auth: authReducer,
     signUp: signUpReducer,
+    accessManagement: accessManagementSlice
   },
 });
 
